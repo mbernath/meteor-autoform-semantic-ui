@@ -112,11 +112,13 @@ Template.afSelect_semanticUI.events({
 });
 
 Template.afSelect_semanticUI.onRendered(function() {
+	var inputControl = this.$('[data-schema-key]');
   this.$(this.firstNode).dropdown(_.extend({
 		fullTextSearch:         this.data.atts.fullTextSearch || false,
 		allowAdditions:         this.data.atts.allowAdditions || false,
 		maxSelections:          this.data.atts.maxSelections || false,
     allowCategorySelection: this.data.atts.allowCategorySelection || false,
-		useLabels:              this.data.atts.useLabels === false ? false : true
+		useLabels:              this.data.atts.useLabels === false ? false : true,
+		onChange: function (event) { inputControl.trigger('change',{ target: inputControl }); }
 	}, this.data.atts.settings));
 });
